@@ -21,6 +21,6 @@ if __name__ == "__main__":
             writer = csv.writer(csv_file, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_ALL)
             for todo in response_usr_todo:
-                csv_list = [str(todo['userId']), user_name,
+                csv_list = [str(todo['userId']), str(user_name),
                             str(todo['completed']), str(todo['title'])]
                 writer.writerow(csv_list)
