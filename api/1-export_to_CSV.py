@@ -1,20 +1,26 @@
 #!/usr/bin/python3
+"""Gather data from an API"""
+import json
 import requests
 import csv
-import json
 import sys
 
 
-def Convert(lst):
-    res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
-    return res_dct
-if len(sys.argv) == 2:
-    res = requests.get('https://jsonplaceholder.typicode.com/users/' +
-                       f'{sys.argv[1]}/todos')
-    response = json.loads(res.text)
-    print(res.text)
-    with open(f"{sys.argv[1]}.csv","w") as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(response)
-    # response = csv.loads(res.text)
-    # all_task = len(response)
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        res = requests.get('https://jsonplaceholder.typicode.com/users/' +
+                           f'{sys.argv[1]}/todos')
+
+        response_usr_todo = json.loads(res.text)
+        todo_all_len = len(response_usr_todo)
+        user = requests.get('https://jsonplaceholder.typicode.com/users/' +
+                            f'{sys.argv[1]}')
+        user_response = json.loads(user.text)
+        user_name = user_response["name"]
+        with open(f"{sys.argv[1]}.csv", "w") as csv_file:
+            writer = csv.writer(csv_file, delimiter=',',
+                                quotechar='"', quoting=csv.QUOTE_ALL)
+            for todo in response_usr_todo:
+                csv_list = [str(todo['userId']), user_name,
+                            str(todo['completed']), todo['title']]
+                writer.writerow(csv_list)
