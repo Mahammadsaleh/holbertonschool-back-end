@@ -12,7 +12,7 @@ if len(sys.argv) == 2:
     done_task_title = ""
     for task in response:
         if task["completed"] is True:
-            done_task_title += "\t" + task["title"] + "\n"
+            done_task_title += "\t " + task["title"] + "\n"
             done_task = done_task + 1
     user = requests.get('https://jsonplaceholder.typicode.com/users/' +
                         f'{sys.argv[1]}')
