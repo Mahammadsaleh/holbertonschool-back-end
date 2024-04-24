@@ -3,9 +3,11 @@ import json
 import requests
 import sys
 
-if len(sys.argv) == 2:
-    res = requests.get('https://jsonplaceholder.typicode.com/users/' +
-                       f'{sys.argv[1]}/todos')
+
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        res = requests.get('https://jsonplaceholder.typicode.com/users/' +
+                           f'{sys.argv[1]}/todos')
     response = json.loads(res.text)
     all_task = len(response)
     done_task = 0
