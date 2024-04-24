@@ -16,7 +16,7 @@ if __name__ == "__main__":
         user = requests.get('https://jsonplaceholder.typicode.com/users/' +
                             f'{sys.argv[1]}')
         user_response = json.loads(user.text)
-        user_name = user_response["name"]
+        user_name = user_response["username"]
         with open(f"{sys.argv[1]}.csv", "w") as csv_file:
             writer = csv.writer(csv_file, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_ALL)
