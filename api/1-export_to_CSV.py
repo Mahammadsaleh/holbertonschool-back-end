@@ -22,5 +22,5 @@ if __name__ == "__main__":
                                 quotechar='"', quoting=csv.QUOTE_ALL)
             for todo in response_usr_todo:
                 csv_list = [str(todo['userId']), user_name,
-                            str(todo['completed']), todo['title']]
+                            str(todo['completed']), str(todo['title'])]
                 writer.writerow(csv_list)
